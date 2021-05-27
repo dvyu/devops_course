@@ -1,0 +1,14 @@
+---
+- name: Enable nginx service
+  hosts: webserver
+  remote_user: root
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx-extras
+        update_cache: yes
+
+    - name: Start nginx service
+      systemd:
+        name: nginx
+        state: started
