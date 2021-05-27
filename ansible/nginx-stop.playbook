@@ -1,0 +1,15 @@
+- name: Install Nginx
+  remote_user: root
+  hosts: all
+  tasks:
+    - name: Start nginx
+      systemd:
+        name: nginx
+        state: started
+      register: result
+    - name: stop Nginx service if it's running
+      systemd:
+        name: nginx
+        state: stopped
+      when:
+        - result['state']== 'started'

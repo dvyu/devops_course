@@ -1,0 +1,10 @@
+- name: Install Nginx
+  remote_user: root
+  hosts: all
+  tasks:
+    - name: Update nginx config
+      copy:
+        src: ./nginx.conf
+        dest: /etc/nginx/sites-enabled/default
+        mode: 0644
+      notify: nginx -s reload
