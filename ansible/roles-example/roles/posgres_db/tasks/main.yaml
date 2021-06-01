@@ -1,0 +1,21 @@
+---
+- name: Add psql repository key
+  apt_key: 
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+- name: Install repository
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main"
+
+- name: Install psql
+  apt:
+    name:
+      - "postgresql-{{ postgres_version }}"
+    update_cache: no
+  ignore_errors: "{{  ansible_check_mode  }}"
+
+- name: Update nginx config
+  copy:
+    src: ./roles/posgres_db/templates/postgresql.conf.sample
+    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf.sample
+    mode: 0644

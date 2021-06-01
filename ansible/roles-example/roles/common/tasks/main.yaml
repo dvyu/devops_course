@@ -1,0 +1,21 @@
+---
+- name: Install packages - Ubuntu
+  apt:
+    name: "{{  package_item }}"
+    update_cache: yes
+    autoremove: yes
+  with_items:
+    - iotop
+    - htop
+    - net-tools
+  when: ansible_os_family == 'Ubuntu'
+- name: Install packages - RedHat
+  yum:
+    name: "{{  package_item }}"
+    update_cache: yes
+    autoremove: yes
+  with_items:
+    - iotop
+    - htop
+    - net-tools
+  when: ansible_os_family == 'RedHat'
