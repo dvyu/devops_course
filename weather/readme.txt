@@ -1,0 +1,3 @@
+Example:
+ 
+  ./weather.sh Perm
