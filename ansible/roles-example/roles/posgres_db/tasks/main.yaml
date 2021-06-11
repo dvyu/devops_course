@@ -26,5 +26,5 @@
   become_user: postgres
   postgresql_user: 
     db: postgres
-    name: {{ postgres_user }}
-    password: {{ postgres_password }}
+    name: "{{ postgres_user }}"
+    password: "{{ postgres_password }}"
