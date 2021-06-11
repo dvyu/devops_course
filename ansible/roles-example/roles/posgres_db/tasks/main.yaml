@@ -14,8 +14,17 @@
     update_cache: no
   ignore_errors: "{{  ansible_check_mode  }}"
 
-- name: Update nginx config
+- name: Update psql config
   copy:
     src: ./roles/posgres_db/templates/postgresql.conf.sample
-    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf.sample
+    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf
     mode: 0644
+
+- name: reset database user
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  postgresql_user: 
+    db: postgres
+    name: {{ postgres_user }}
+    password: {{ postgres_password }}

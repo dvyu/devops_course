@@ -1,5 +1,5 @@
 ---
-- name: Set
+- name: Setup DB
   hosts: db_instances
   remote_user: root
   roles:
