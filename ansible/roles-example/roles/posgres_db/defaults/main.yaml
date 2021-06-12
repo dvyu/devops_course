@@ -1,5 +1,6 @@
 ---
-postgres_version: 10
+postgres_version: 9.0
 postgres_user: postgres
+postgres_group: postgres
 postgres_password: postgres
 postgres_port: 5432

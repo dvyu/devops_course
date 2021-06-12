@@ -11,14 +11,21 @@
   apt:
     name:
       - "postgresql-{{ postgres_version }}"
-    update_cache: no
+    update_cache: yes
   ignore_errors: "{{  ansible_check_mode  }}"
 
 - name: Update psql config
   copy:
     src: ./roles/posgres_db/templates/postgresql.conf.sample
-    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf
+    dest: /etc/postgresql/{{ postgres_version }}/main/postgresql.conf.sample
+    owner: "{{ postgres_user }}"
+    group: "{{ postgres_group }}"
     mode: 0644
+
+- name: Make sure psycopg2 is installed
+  pip:
+    name: psycopg2
+    state: present
 
 - name: reset database user
   become: yes
@@ -28,3 +35,18 @@
     db: postgres
     name: "{{ postgres_user }}"
     password: "{{ postgres_password }}"
+    #password: "{{ postgres_password | password_hash('sha512') }}"
+    #encrypted: yes
+
+- name: create database user
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  postgresql_user: 
+    db: postgres
+    name: "mytestuser"
+    password: "{{ postgres_password }}"
+    #password: "{{ postgres_password | password_hash('sha512') }}"
+    #priv: ALL:SELECT,INSERT,UPDATE,DELETE,CONNECT
+    role_attr_flags: "SUPERUSER"
+    #encrypted: yes

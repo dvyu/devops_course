@@ -1,21 +1,24 @@
 ---
 - name: Install packages - Ubuntu
   apt:
-    name: "{{  package_item }}"
+    name: "{{  item }}"
     update_cache: yes
     autoremove: yes
   with_items:
-    - iotop
     - htop
-    - net-tools
-  when: ansible_os_family == 'Ubuntu'
+    - python-pip
+    - python-setuptools
+    - python-dev
+    - gcc
+    - python-psycopg2
+  when: ansible_os_family == 'Debian'
 - name: Install packages - RedHat
   yum:
     name: "{{  package_item }}"
     update_cache: yes
     autoremove: yes
   with_items:
-    - iotop
-    - htop
-    - net-tools
+    - python-pip
+    - python-setuptools
+    - python-dev
   when: ansible_os_family == 'RedHat'
