@@ -22,6 +22,17 @@
     group: "{{ postgres_group }}"
     mode: 0644
 
+- name: Check psql configs
+  become: yes
+  become_method: sudo
+  become_user: postgres
+  shell: "psql -f ./roles/posgres_db/templates/check-configuration.sql"
+  register: psql_config_status
+
+- name: psql test status
+  debug:
+    msg: "{{ psql_config_status }}"
+
 - name: Make sure psycopg2 is installed
   pip:
     name: psycopg2
