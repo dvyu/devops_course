@@ -41,6 +41,13 @@
   debug:
     msg: "{{ psql_config_status }}"
 
+- name: Service NGINX restart and enable on boot
+  systemd:
+    name: postgres
+    state: reloaded
+    daemon_reload: yes
+  when: psql_config_status.rc == 0
+
 - name: Make sure psycopg2 is installed
   pip:
     name: psycopg2
