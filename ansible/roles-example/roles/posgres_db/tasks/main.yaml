@@ -41,7 +41,7 @@
   debug:
     msg: "{{ psql_config_status }}"
 
-- name: Service NGINX restart and enable on boot
+- name: reload psql if config validated
   systemd:
     name: postgresql
     state: reloaded
