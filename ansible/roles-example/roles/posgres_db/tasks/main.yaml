@@ -43,7 +43,7 @@
 
 - name: Service NGINX restart and enable on boot
   systemd:
-    name: postgres
+    name: postgresql
     state: reloaded
     daemon_reload: yes
   when: psql_config_status.rc == 0
