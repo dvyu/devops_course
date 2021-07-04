@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: ls
+      run: ls
+    - name: ssh key
+      run: |
+        echo "$SSH_PUBLIC_KEY" | base64 -d > ./terraform2/id_rsa.pub
+        cat ./terraform2/id_rsa.pub
+
+    - name: apply terraform
+      uses:  dvyu/devops_course_terraform@main
+      env:
+        WORKDIR: ./terraform2
+        APPLY: true
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: apply ansible
+      uses:  dvyu/devops_course_ansible@main
+      env:
+        WORKDIR: ./ansible/first-example
+        APPLY: true

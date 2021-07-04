@@ -6,7 +6,7 @@
     - name: Install Nginx
       apt:
         name: nginx-extras
-        update_cache: no
+        update_cache: false
 
     - name: Start nginx service
       systemd:
