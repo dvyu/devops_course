@@ -1,0 +1,21 @@
+name: Terraform
+
+on:  
+  push:
+    paths:
+    - 'terraform2/**'
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  tf:
+    name: tf
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: check dir
+      run: ls
+
+    - name: check tf
+      uses:  dvyu/devops_course_terraform 
