@@ -1,3 +1,3 @@
 variable "public_key" {
-  default = "~/.ssh/id_rsa.pub"
+  default = "./id_rsa.pub"
 }

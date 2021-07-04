@@ -18,9 +18,7 @@ jobs:
       run: ls
     - name: ssh key
       run: |
-        mkdir ~/.ssh
-        echo "$SSH_PUBLIC_KEY" | base64 -d > ~/.ssh/id_rsa.pub
-        cat ~/.ssh/id_rsa.pub
+        echo "$SSH_PUBLIC_KEY" | base64 -d > ./terraform2/id_rsa.pub
 
     - name: check terraform
       uses:  dvyu/devops_course_terraform@main
