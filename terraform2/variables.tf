@@ -1,3 +1,3 @@
 variable "public_key" {
-  default = "/key.pub"
+  default = "key.pub"
 }
