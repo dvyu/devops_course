@@ -18,4 +18,4 @@ jobs:
       run: ls
 
     - name: check tf
-      uses:  dvyu/devops_course_terraform@master
+      uses:  dvyu/devops_course_terraform@main
