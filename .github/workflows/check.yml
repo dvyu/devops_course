@@ -1,9 +1,9 @@
 name: CI
 
 on:  
-  push:
-    paths:
-    - 'terraform2/**'
+#  push:
+#    paths:
+#    - 'terraform2/**'
   pull_request:
     branches:
       - master
