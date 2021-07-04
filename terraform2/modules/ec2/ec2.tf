@@ -14,6 +14,11 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+resource "aws_key_pair" "install_key" {
+  key_name   = "install-key"
+  public_key = "${file(var.public_key)}"
+}
+
 resource "aws_instance" "ec2" {
   ami = data.aws_ami.ubuntu.id
   instance_type = var.instance_type

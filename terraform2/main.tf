@@ -27,7 +27,7 @@ module "ec2" {
   sg_ids = [module.vpc.public_sg_id]
   name = "web"
   env = "devops_cource"
-  key_name = "test-key"
+  key_name = "${aws_key_pair.install_key.key_name}"
 }
 
 
