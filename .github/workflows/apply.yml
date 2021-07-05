@@ -26,5 +26,6 @@ jobs:
     - name: apply ansible
       uses:  dvyu/devops_course_ansible@main
       env:
-        WORKDIR: ./ansible/first-example
+        WORKDIR: ./ansible/python
         APPLY: true
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
