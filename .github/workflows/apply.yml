@@ -23,9 +23,16 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         SSH_PUBLIC_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
 
-    - name: apply ansible
+    - name: apply ansible python
       uses:  dvyu/devops_course_ansible@main
       env:
         WORKDIR: ./ansible/python
+        APPLY: true
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: apply ansible nginx
+      uses:  dvyu/devops_course_ansible@main
+      env:
+        WORKDIR: ./ansible/first-example
         APPLY: true
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
